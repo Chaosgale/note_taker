@@ -1,10 +1,9 @@
 const notes = require('express').Router();
 
-const {readFromFile, readAndAppend} = require('../helpers/fsUtils')
-
-const notesData = require("../db/db.json")
+const {readFromFile, readAndAppend, writeToFile} = require('../helpers/fsUtils')
 
 notes.get('/', (req, res) => {
+
     readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 })
 
@@ -24,9 +23,16 @@ notes.post('/', (req, res) => {
       res.json(response);
 });
 
-notes.delete('/', (req, res) => {
-    readFromFile('./db/db.json').then((data) => {
-        const oldData = data.find()
+notes.delete('/:id', (req, res) => {
+    console.log(req.body);
+    const nodeId = req.params.id
+    readFromFile('./db/db.json', 'utf8').then((data) => {
+        const parseData = JSON.parse(data)
+        const newData = parseData.filter((note) => note.id !== nodeId)
+        console.log(newData);
+        return newData
+    }).then((anything) => writeToFile('./db/db.json', anything)).then((anything) => {
+        res.json(anything)
     })
 })
 
