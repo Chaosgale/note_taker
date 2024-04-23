@@ -18,4 +18,4 @@ You can access the deployed Note Taker app [here](https://notes-tracker-281c6bac
 
 ## Screenshot
 
-![Screenshot](https://raw.githubusercontent.com/Chaosgale/weather/main/assets/img/Screenshot%20.png)
+![Screenshot](https://raw.githubusercontent.com/Chaosgale/note_taker/main/screenshot/shot.png)
